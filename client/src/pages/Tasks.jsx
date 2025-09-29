@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import AddTask from "../components/AddTask";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
