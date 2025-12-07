@@ -3,9 +3,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import Loading from "./Loading";
 
-const UpdateTask = ({ task }) => {
+const UpdateTask = ({ task, onClose }) => {
   const { backendUrl } = useContext(AppContext);
 
   const [taskId, setTaskId] = useState(null);
@@ -38,6 +37,7 @@ const UpdateTask = ({ task }) => {
         setTaskName("");
         setTaskDesc("");
         toast.success(data.message);
+        onClose();
       } else {
         setLoading(false);
         toast.error(data.message);
@@ -85,15 +85,15 @@ const UpdateTask = ({ task }) => {
 
             <button
               type="submit"
-              className="bg-[#d98c4a] rounded text-white py-2 font-semibold cursor-pointer"
+              className={`${
+                loading && "cursor-progress"
+              } bg-[#d98c4a] rounded text-white py-2 font-semibold cursor-pointer`}
             >
-              Update Task
+              {loading ? "Updating ..." : "Update Task"}
             </button>
           </form>
         </div>
       </div>
-
-      {loading && <Loading />}
     </>
   );
 };

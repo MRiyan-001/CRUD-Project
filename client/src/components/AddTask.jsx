@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
-const AddTask = () => {
+const AddTask = ({ onClose }) => {
   const { backendUrl } = useContext(AppContext);
 
   const [taskName, setTaskName] = useState("");
@@ -29,6 +29,7 @@ const AddTask = () => {
         toast.success(data.message);
         setTaskName("");
         setTaskDesc("");
+        onClose();
       } else {
         setLoading(false);
         toast.error(data.message);
@@ -54,6 +55,7 @@ const AddTask = () => {
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
               type="text"
+              required
               placeholder="Write your task name"
               className="border border-gray-300 bg-gray-50 p-2 rounded text-sm text-gray-600"
             />
@@ -62,6 +64,7 @@ const AddTask = () => {
           <div className="flex flex-col gap-1">
             <label htmlFor="taskTitle">Task desc.</label>
             <textarea
+              required
               value={taskDesc}
               onChange={(e) => setTaskDesc(e.target.value)}
               type="text"
@@ -73,9 +76,11 @@ const AddTask = () => {
 
           <button
             type="submit"
-            className="bg-[#d98c4a] rounded text-white py-2 font-semibold cursor-pointer"
+            className={`${
+              loading && "cursor-progress"
+            } bg-[#d98c4a] rounded text-white py-2 font-semibold cursor-pointer`}
           >
-            Add Task
+            {loading ? "Adding ..." : "Add Task"}
           </button>
         </form>
       </div>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-// import { dummyTasksData } from "../assets/assets";
 
 export const AppContext = createContext();
 
@@ -23,7 +22,6 @@ export const AppContextProvider = (props) => {
   useEffect(() => {
     fetchAllTasks();
   }, []);
-
 
   const value = {
     tasks,
