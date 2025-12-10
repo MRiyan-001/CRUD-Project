@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  client:
+    build: ./client
+    image: riyan001/todo_app:client
+    container_name: todo_client
+    ports:
+      - "5174:80"
+    networks:
+      - fullstack-network
+    depends_on:
+      - server
+    
+  server:
+    build: ./server
+    image: riyan001/todo_app:server
+    container_name: todo_server
+    ports:
+      - "4000:4000"
+    networks:
+      - fullstack-network
+
+networks:
+  fullstack-network:
+    driver: bridge
+
